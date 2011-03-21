@@ -101,7 +101,7 @@ endif()
 
 if( UNIX )
   install(TARGETS authserver DESTINATION bin)
-  install(TARGETS auth DESTINATION bin)
+  install(FILES auth DESTINATION bin)
   install(FILES  authserver.conf.dist DESTINATION etc)
 elseif( WIN32 )
   install(TARGETS authserver DESTINATION "${CMAKE_INSTALL_PREFIX}")
