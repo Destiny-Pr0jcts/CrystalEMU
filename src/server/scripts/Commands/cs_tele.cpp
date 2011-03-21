@@ -41,6 +41,7 @@ public:
 	     { "mall", 		SEC_PLAYER,      false, &HandleTelePlayerMallCommand,	      "", NULL },
 	     { "arena", 		SEC_PLAYER,	   false, &HandleTelePlayerArenaCommand,	      "", NULL },
 	     { "schlachtfeld",	SEC_PLAYER,	   false, &HandleTelePlayerSchlachtfeldCommand, "", NULL },
+		 { "hyjal",			SEC_PLAYER,		false, &HandleTelePlayerHyjalCommand,		"", NULL },
 	     { NULL,			0,		   false, NULL, 				      "", NULL }
 	 };
         static ChatCommand teleCommandTable[] =
@@ -425,6 +426,33 @@ public:
             me->SaveRecallPosition();
 
         me->TeleportTo(0, -4023.226807, -1371.370728, 148.659882, 6.052461); // <---- it means (map,x,y,z,orientation), use your own values
+        return true;
+    }
+		    static bool HandleTelePlayerHyjalCommand(ChatHandler* handler, const char* args)
+    {
+        if (*args)
+            return false;
+
+        Player* me = handler->GetSession()->GetPlayer();
+
+        if (me->isInCombat())
+        {
+            handler->SendSysMessage(LANG_YOU_IN_COMBAT);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        // stop flight if need
+        if (me->isInFlight())
+        {
+            me->GetMotionMaster()->MovementExpired();
+            me->CleanupAfterTaxiFlight();
+        }
+        // save only in non-flight case
+        else
+            me->SaveRecallPosition();
+
+        me->TeleportTo(1, 4658.140137, -3737.810059, 946.948975, 1.895780); // <---- it means (map,x,y,z,orientation), use your own values
         return true;
     }
 };
