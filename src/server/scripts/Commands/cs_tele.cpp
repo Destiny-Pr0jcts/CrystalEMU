@@ -35,13 +35,21 @@ public:
 
     ChatCommand* GetCommands() const
     {
+	 static ChatCommand teleplayerCommandTable[] =
+	 {
+	     { "playertreff",	SEC_PLAYER,	   false, &HandleTelePlayerPlayertreffCommand,  "", NULL },
+	     { "mall", 		SEC_PLAYER,      false, &HandleTelePlayerMallCommand,	      "", NULL },
+	     { "arena", 		SEC_PLAYER,	   false, &HandleTelePlayerArenaCommand,	      "", NULL },
+	     { "schlachtfeld",	SEC_PLAYER,	   false, &HandleTelePlayerSchlachtfeldCommand, "", NULL },
+	     { NULL,			0,		   false, NULL, 				      "", NULL }
+	 };
         static ChatCommand teleCommandTable[] =
         {
             { "add",            SEC_ADMINISTRATOR,  false, &HandleTeleAddCommand,             "", NULL },
             { "del",            SEC_ADMINISTRATOR,  true,  &HandleTeleDelCommand,             "", NULL },
             { "name",           SEC_MODERATOR,      true,  &HandleTeleNameCommand,            "", NULL },
             { "group",          SEC_MODERATOR,      false, &HandleTeleGroupCommand,           "", NULL },
-			{ "player",			SEC_PLAYER,			false, NULL,             "", teleplayerCommandTable },
+	     { "player",	    SEC_PLAYER,	   false, NULL,            			   "", teleplayerCommandTable },
             { "",               SEC_MODERATOR,      false, &HandleTeleCommand,                "", NULL },
             { NULL,             0,                  false, NULL,                              "", NULL }
         };
@@ -50,15 +58,7 @@ public:
             { "tele",           SEC_MODERATOR,      false, NULL,                   "", teleCommandTable },
             { NULL,             0,                  false, NULL,                               "", NULL }
         };
-		static ChatCommand teleplayerCommandTable[] =
-		{
-			{ "playertreff",	SEC_PLAYER,			false, &HandleTelePlayerPlayertreffCommand,                   "", NULL },
-			{ "mall", 			SEC_PLAYER,         false, &HandleTelePlayerMallCommand,						  "", NULL },
-			{ "arena", 			SEC_PLAYER,			false, &HandleTelePlayerArenaCommand,						  "", NULL },
-			{ "schlachtfeld",	SEC_PLAYER,			false, &HandleTelePlayerSchlachtfeldCommand,				  "", NULL },
-			{ NULL,				0,					false, NULL, 												  "", NULL }
-		}
-        return commandTable;
+	 return commandTable;
     }
 
     static bool HandleTeleAddCommand(ChatHandler* handler, const char* args)
