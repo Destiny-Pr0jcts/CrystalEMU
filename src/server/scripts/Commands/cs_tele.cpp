@@ -321,7 +321,7 @@ public:
     }
 	    static bool HandleTelePlayerPlayertreffCommand(ChatHandler* handler, const char* args)
     {
-        if (!*args)
+        if (*args)
             return false;
 
         Player* me = handler->GetSession()->GetPlayer();
@@ -348,7 +348,7 @@ public:
     }
 	    static bool HandleTelePlayerMallCommand(ChatHandler* handler, const char* args)
     {
-        if (!*args)
+        if (*args)
             return false;
 
         Player* me = handler->GetSession()->GetPlayer();
@@ -375,7 +375,7 @@ public:
     }
 	    static bool HandleTelePlayerArenaCommand(ChatHandler* handler, const char* args)
     {
-        if (!*args)
+        if (*args)
             return false;
 
         Player* me = handler->GetSession()->GetPlayer();
@@ -402,7 +402,7 @@ public:
     }
 	    static bool HandleTelePlayerSchlachtfeldCommand(ChatHandler* handler, const char* args)
     {
-        if (!*args)
+        if (*args)
             return false;
 
         Player* me = handler->GetSession()->GetPlayer();
