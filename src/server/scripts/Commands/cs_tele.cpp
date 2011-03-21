@@ -41,6 +41,7 @@ public:
             { "del",            SEC_ADMINISTRATOR,  true,  &HandleTeleDelCommand,             "", NULL },
             { "name",           SEC_MODERATOR,      true,  &HandleTeleNameCommand,            "", NULL },
             { "group",          SEC_MODERATOR,      false, &HandleTeleGroupCommand,           "", NULL },
+			{ "player",			SEC_PLAYER,			false, NULL,             "", teleplayerCommandTable },
             { "",               SEC_MODERATOR,      false, &HandleTeleCommand,                "", NULL },
             { NULL,             0,                  false, NULL,                              "", NULL }
         };
@@ -49,6 +50,14 @@ public:
             { "tele",           SEC_MODERATOR,      false, NULL,                   "", teleCommandTable },
             { NULL,             0,                  false, NULL,                               "", NULL }
         };
+		static ChatCommand teleplayerCommandTable[] =
+		{
+			{ "playertreff",	SEC_PLAYER,			false, &HandleTelePlayerPlayertreffCommand,                   "", NULL },
+			{ "mall", 			SEC_PLAYER,         false, &HandleTelePlayerMallCommand,						  "", NULL },
+			{ "arena", 			SEC_PLAYER,			false, &HandleTelePlayerArenaCommand,						  "", NULL },
+			{ "schlachtfeld",	SEC_PLAYER,			false, &HandleTelePlayerSchlachtfeldCommand,				  "", NULL },
+			{ NULL,				0,					false, NULL, 												  "", NULL }
+		}
         return commandTable;
     }
 
@@ -308,6 +317,114 @@ public:
             me->SaveRecallPosition();
 
         me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
+        return true;
+    }
+	    static bool HandleTelePlayerPlayertreffCommand(ChatHandler* handler, const char* args)
+    {
+        if (!*args)
+            return false;
+
+        Player* me = handler->GetSession()->GetPlayer();
+
+        if (me->isInCombat())
+        {
+            handler->SendSysMessage(LANG_YOU_IN_COMBAT);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        // stop flight if need
+        if (me->isInFlight())
+        {
+            me->GetMotionMaster()->MovementExpired();
+            me->CleanupAfterTaxiFlight();
+        }
+        // save only in non-flight case
+        else
+            me->SaveRecallPosition();
+
+        me->TeleportTo(0, -4852.580078, -1001.979980, 453.765015, 0.720571); // <---- it means (map,x,y,z,orientation), use your own values
+        return true;
+    }
+	    static bool HandleTelePlayerMallCommand(ChatHandler* handler, const char* args)
+    {
+        if (!*args)
+            return false;
+
+        Player* me = handler->GetSession()->GetPlayer();
+
+        if (me->isInCombat())
+        {
+            handler->SendSysMessage(LANG_YOU_IN_COMBAT);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        // stop flight if need
+        if (me->isInFlight())
+        {
+            me->GetMotionMaster()->MovementExpired();
+            me->CleanupAfterTaxiFlight();
+        }
+        // save only in non-flight case
+        else
+            me->SaveRecallPosition();
+
+        me->TeleportTo(0, -4149.410156, -1397.839966, 197.598999, 3.402610); // <---- it means (map,x,y,z,orientation), use your own values
+        return true;
+    }
+	    static bool HandleTelePlayerArenaCommand(ChatHandler* handler, const char* args)
+    {
+        if (!*args)
+            return false;
+
+        Player* me = handler->GetSession()->GetPlayer();
+
+        if (me->isInCombat())
+        {
+            handler->SendSysMessage(LANG_YOU_IN_COMBAT);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        // stop flight if need
+        if (me->isInFlight())
+        {
+            me->GetMotionMaster()->MovementExpired();
+            me->CleanupAfterTaxiFlight();
+        }
+        // save only in non-flight case
+        else
+            me->SaveRecallPosition();
+
+        me->TeleportTo(0, -13224.900391, 233.341995, 33.362801, 1.099950); // <---- it means (map,x,y,z,orientation), use your own values
+        return true;
+    }
+	    static bool HandleTelePlayerSchlachtfeldCommand(ChatHandler* handler, const char* args)
+    {
+        if (!*args)
+            return false;
+
+        Player* me = handler->GetSession()->GetPlayer();
+
+        if (me->isInCombat())
+        {
+            handler->SendSysMessage(LANG_YOU_IN_COMBAT);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        // stop flight if need
+        if (me->isInFlight())
+        {
+            me->GetMotionMaster()->MovementExpired();
+            me->CleanupAfterTaxiFlight();
+        }
+        // save only in non-flight case
+        else
+            me->SaveRecallPosition();
+
+        me->TeleportTo(0, -4023.226807, -1371.370728, 148.659882, 6.052461); // <---- it means (map,x,y,z,orientation), use your own values
         return true;
     }
 };
