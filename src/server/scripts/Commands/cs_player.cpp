@@ -29,12 +29,12 @@ class player_commandscript : public CommandScript
 			};
             static ChatCommand commandTable[] =
             {
-                { "player",          SEC_ADMINISTRATOR, false,   &playerCommandTable,        "", NULL },
+                { "player",          SEC_ADMINISTRATOR, false,  NULL,        "", playerCommandTable },
                 { NULL,             0,                  false,  NULL,                            "", NULL }
             };
             return commandTable;
         }
-		    static bool HandlePlayerFlyCommand(ChatHandler* handler, const char* args)
+	static bool HandlePlayerFlyCommand(ChatHandler* handler, const char* args)
     {
         if (!*args)
             return false;
