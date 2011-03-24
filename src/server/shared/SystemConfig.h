@@ -24,7 +24,7 @@
 #include "Define.h"
 #include "revision.h"
 
-#define _PACKAGENAME "MechiWoWCore "
+#define _PACKAGENAME "Mechi-WoW "
 
 #if TRINITY_ENDIAN == TRINITY_BIGENDIAN
 # define _ENDIAN_STRING "big-endian"
@@ -34,12 +34,12 @@
 
 #if PLATFORM == PLATFORM_WINDOWS
 # ifdef _WIN64
-#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " " _BUILD_DIRECTIVE " Hash: " _HASH " (Win64, " _ENDIAN_STRING ")"
+#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " Hash: " _HASH " (Win64, " _ENDIAN_STRING ")"
 # else
-#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " " _BUILD_DIRECTIVE " Hash: " _HASH " (Win32, " _ENDIAN_STRING ")"
+#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " Hash: " _HASH " (Win32, " _ENDIAN_STRING ")"
 # endif
 #else
-#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " " _BUILD_DIRECTIVE " Hash: " _HASH " (Unix, " _ENDIAN_STRING ")"
+#  define _FULLVERSION _PACKAGENAME "Rev: " _REVISION " Hash: " _HASH " (Unix, " _ENDIAN_STRING ")"
 #endif
 #endif
 

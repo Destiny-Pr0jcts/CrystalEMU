@@ -233,12 +233,6 @@ ChatCommand * ChatHandler::getCommandTable()
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
-	static ChatCommand playerCommandTable[] =
-	{
-		{ "fly",			SEC_ADMINISTRATOR,	false,	OldHandler<&ChatHandler::HandlePlayerFlyCommand>,			"", NULL },
-		{ NULL,				0,					false,	NULL,														"", NULL },
-	};
-	
     static ChatCommand pdumpCommandTable[] =
     {
         { "load",           SEC_ADMINISTRATOR,  true,  OldHandler<&ChatHandler::HandlePDumpLoadCommand>,           "", NULL },

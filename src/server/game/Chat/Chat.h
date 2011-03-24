@@ -339,9 +339,6 @@ class ChatHandler
         bool HandleRepairitemsCommand(const char* args);
 
         bool HandleTempGameObjectCommand(const char* args);
-		
-		//own commands
-		bool HandlePlayerFlyCommand(const char* args);
 
         //! Development Commands
 
