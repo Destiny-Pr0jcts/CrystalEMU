@@ -89,7 +89,7 @@ public:
         if (!*args)
             return false;
 
-        Player *target =  handler->GetSession->GetPlayer();
+        Player *target =  handler->GetSession()->GetPlayer();
         if (!target)
             target = handler->GetSession()->GetPlayer();
 
