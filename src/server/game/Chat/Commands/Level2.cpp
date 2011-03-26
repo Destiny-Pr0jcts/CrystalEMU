@@ -721,7 +721,7 @@ bool ChatHandler::HandleWaterwalkCommand(const char* args)
     if (!*args)
         return false;
 
-    Player *player = getSelectedPlayer();
+    Player *player = GetSession()->GetPlayer();
 
     if (!player)
     {
