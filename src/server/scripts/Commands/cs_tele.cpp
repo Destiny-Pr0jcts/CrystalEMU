@@ -38,7 +38,6 @@ public:
 	 static ChatCommand teleplayerCommandTable[] =
 	 {
 	     { "playertreff",	SEC_PLAYER,	   false, &HandleTelePlayerPlayertreffCommand,  "", NULL },
-	     { "mall", 		SEC_PLAYER,      false, &HandleTelePlayerMallCommand,	      "", NULL },
 	     { "arena", 		SEC_PLAYER,	   false, &HandleTelePlayerArenaCommand,	      "", NULL },
 	     { "schlachtfeld",	SEC_PLAYER,	   false, &HandleTelePlayerSchlachtfeldCommand, "", NULL },
 		 { "hyjal",			SEC_PLAYER,		false, &HandleTelePlayerHyjalCommand,		"", NULL },
@@ -51,7 +50,7 @@ public:
             { "del",            SEC_ADMINISTRATOR,  true,  &HandleTeleDelCommand,             "", NULL },
             { "name",           SEC_MODERATOR,      true,  &HandleTeleNameCommand,            "", NULL },
             { "group",          SEC_MODERATOR,      false, &HandleTeleGroupCommand,           "", NULL },
-	     { "player",	    SEC_PLAYER,	   false, NULL,            			   "", teleplayerCommandTable },
+			{ "player",	    SEC_PLAYER,	   false, NULL,            			   "", teleplayerCommandTable },
             { "",               SEC_MODERATOR,      false, &HandleTeleCommand,                "", NULL },
             { NULL,             0,                  false, NULL,                              "", NULL }
         };
@@ -345,34 +344,7 @@ public:
         else
             me->SaveRecallPosition();
 
-        me->TeleportTo(0, -4852.580078, -1001.979980, 453.765015, 0.720571); // <---- it means (map,x,y,z,orientation), use your own values
-        return true;
-    }
-	    static bool HandleTelePlayerMallCommand(ChatHandler* handler, const char* args)
-    {
-        if (*args)
-            return false;
-
-        Player* me = handler->GetSession()->GetPlayer();
-
-        if (me->isInCombat())
-        {
-            handler->SendSysMessage(LANG_YOU_IN_COMBAT);
-            handler->SetSentErrorMessage(true);
-            return false;
-        }
-
-        // stop flight if need
-        if (me->isInFlight())
-        {
-            me->GetMotionMaster()->MovementExpired();
-            me->CleanupAfterTaxiFlight();
-        }
-        // save only in non-flight case
-        else
-            me->SaveRecallPosition();
-
-        me->TeleportTo(0, -4149.410156, -1397.839966, 197.598999, 3.402610); // <---- it means (map,x,y,z,orientation), use your own values
+        me->TeleportTo(530, -1886, 5361, -12, 1); // <---- it means (map,x,y,z,orientation), use your own values
         return true;
     }
 	    static bool HandleTelePlayerArenaCommand(ChatHandler* handler, const char* args)
