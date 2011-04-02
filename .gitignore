@@ -10,3 +10,4 @@ build/
 *.patch
 sql/old
 *.diff
+anticheat.sql
