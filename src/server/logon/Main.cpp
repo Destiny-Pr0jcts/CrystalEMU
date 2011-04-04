@@ -34,7 +34,7 @@
 #include "RealmAcceptor.h"
 
 #ifndef _TRINITY_REALM_CONFIG
-# define _TRINITY_REALM_CONFIG  "authserver.conf"
+# define _TRINITY_REALM_CONFIG  "logon.conf"
 #endif
 
 bool StartDB();
@@ -269,7 +269,7 @@ bool StartDB()
         synch_threads = 1;
     }
 
-    // NOTE: While authserver is singlethreaded you should keep synch_threads == 1. Increasing it is just silly since only 1 will be used ever.
+    // NOTE: While logon is singlethreaded you should keep synch_threads == 1. Increasing it is just silly since only 1 will be used ever.
     if (!LoginDatabase.Open(dbstring.c_str(), worker_threads, synch_threads))
     {
         sLog->outError("Cannot connect to database");

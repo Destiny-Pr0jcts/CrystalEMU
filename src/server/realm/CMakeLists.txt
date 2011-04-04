@@ -19,14 +19,14 @@ if( USE_COREPCH )
 endif()
 
 if ( USE_COREPCH AND MSVC )
-  set(worldserver_SRCS
+  set(realm_SRCS
     PrecompiledHeaders/worldPCH.cpp
     PrecompiledHeaders/worldPCH.h
   )
 endif()
 
-set(worldserver_SRCS
-  ${worldserver_SRCS}
+set(realm_SRCS
+  ${realm_SRCS}
   ${sources_CommandLine}
   ${sources_RemoteAccess}
   ${sources_TCSoap}
@@ -35,10 +35,10 @@ set(worldserver_SRCS
 )
 
 if( WIN32 )
-  set(worldserver_SRCS
-    ${worldserver_SRCS}
+  set(realm_SRCS
+    ${realm_SRCS}
     ${sources_Debugging}
-    worldserver.rc
+    realm.rc
   )
 endif()
 
@@ -142,23 +142,23 @@ include_directories(
   ${OPENSSL_INCLUDE_DIR}
 )
 
-set(worldserver_LINK_FLAGS "")
+set(realm_LINK_FLAGS "")
 
-add_executable(worldserver ${worldserver_SRCS})
+add_executable(realm ${realm_SRCS})
 
 if( NOT WIN32 )
-  add_definitions(-D_TRINITY_CORE_CONFIG='"${CONF_DIR}/worldserver.conf"')
+  add_definitions(-D_TRINITY_CORE_CONFIG='"${CONF_DIR}/realm.conf"')
 endif()
 
-add_dependencies(worldserver revision.h)
+add_dependencies(realm revision.h)
 
 if( UNIX )
-  set(worldserver_LINK_FLAGS "-pthread -lncurses ${worldserver_LINK_FLAGS}")
+  set(realm_LINK_FLAGS "-pthread -lncurses ${realm_LINK_FLAGS}")
 endif()
 
-set_target_properties(worldserver PROPERTIES LINK_FLAGS "${worldserver_LINK_FLAGS}")
+set_target_properties(realm PROPERTIES LINK_FLAGS "${realm_LINK_FLAGS}")
 
-target_link_libraries(worldserver
+target_link_libraries(realm
   game
   shared
   scripts
@@ -177,27 +177,27 @@ target_link_libraries(worldserver
 )
 
 if( WIN32 )
-  add_custom_command(TARGET worldserver
+  add_custom_command(TARGET realm
     POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/worldserver.conf.dist ${CMAKE_BINARY_DIR}/bin/$(ConfigurationName)/
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/realm.conf.dist ${CMAKE_BINARY_DIR}/bin/$(ConfigurationName)/
   )
 endif()
 
 if( UNIX )
-  install(TARGETS worldserver DESTINATION bin)
-  install(FILES world DESTINATION bin)
-  install(FILES worldserver.conf.dist DESTINATION etc)
+  install(TARGETS realm DESTINATION bin)
+  install(FILES run-realm DESTINATION bin)
+  install(FILES realm.conf.dist DESTINATION etc)
 elseif( WIN32 )
-  install(TARGETS worldserver DESTINATION "${CMAKE_INSTALL_PREFIX}")
-  install(FILES worldserver.conf.dist DESTINATION "${CMAKE_INSTALL_PREFIX}")
+  install(TARGETS realm DESTINATION "${CMAKE_INSTALL_PREFIX}")
+  install(FILES realm.conf.dist DESTINATION "${CMAKE_INSTALL_PREFIX}")
 endif()
 
 # Generate precompiled header
 if( USE_COREPCH )
   if(CMAKE_COMPILER_IS_GNUCXX)
-    add_precompiled_header(worldserver ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/worldPCH.h)
+    add_precompiled_header(realm ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/worldPCH.h)
   elseif(MSVC)
-    add_native_precompiled_header(worldserver ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/worldPCH)
+    add_native_precompiled_header(realm ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/worldPCH)
   endif()
 endif()
 

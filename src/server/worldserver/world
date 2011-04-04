@@ -1,5 +1,0 @@
-#!/bin/bash
-while [ 1 ]; do
-  echo "WorldServer started at `date`" >> start.log
-  ./worldserver
-done

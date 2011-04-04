@@ -8,7 +8,7 @@
 # WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
 # implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
-########### authserver ###############
+########### logon ###############
 
 file(GLOB_RECURSE sources_authentication Authentication/*.cpp Authentication/*.h)
 file(GLOB_RECURSE sources_realms Realms/*.cpp Realms/*.h)
@@ -20,14 +20,14 @@ if( USE_COREPCH )
 endif()
 
 if ( USE_COREPCH AND MSVC )
-  set(authserver_SRCS
+  set(logon_SRCS
     PrecompiledHeaders/authPCH.cpp
     PrecompiledHeaders/authPCH.h
   )
 endif()
 
-set(authserver_SRCS
-  ${authserver_SRCS}
+set(logon_SRCS
+  ${logon_SRCS}
   ${sources_authentication}
   ${sources_realms}
   ${sources_server}
@@ -35,10 +35,10 @@ set(authserver_SRCS
 )
 
 if( WIN32 )
-set(authserver_SRCS
-    ${authserver_SRCS}
+set(logon_SRCS
+    ${logon_SRCS}
     ${sources_Debugging}
-    authserver.rc
+    logon.rc
 )
 endif()
 
@@ -62,29 +62,29 @@ include_directories(
   ${OPENSSL_INCLUDE_DIR}
 )
 
-set(authserver_LINK_FLAGS "")
+set(logon_LINK_FLAGS "")
 
-add_executable(authserver
-  ${authserver_SRCS}
+add_executable(logon
+  ${logon_SRCS}
 )
 
-add_dependencies(authserver revision.h)
+add_dependencies(logon revision.h)
 
 if( NOT WIN32 )
-  add_definitions(-D_TRINITY_REALM_CONFIG='"${CONF_DIR}/authserver.conf"')
+  add_definitions(-D_TRINITY_REALM_CONFIG='"${CONF_DIR}/logon.conf"')
 endif()
 
 if( UNIX )
-  set(authserver_LINK_FLAGS "-pthread ${authserver_LINK_FLAGS}")
+  set(logon_LINK_FLAGS "-pthread ${logon_LINK_FLAGS}")
 endif()
 
 if( CMAKE_SYSTEM_NAME MATCHES "Darwin" )
-  set(authserver_LINK_FLAGS "-framework Carbon ${authserver_LINK_FLAGS}")
+  set(logon_LINK_FLAGS "-framework Carbon ${logon_LINK_FLAGS}")
 endif()
 
-set_target_properties(authserver PROPERTIES LINK_FLAGS "${authserver_LINK_FLAGS}")
+set_target_properties(logon PROPERTIES LINK_FLAGS "${logon_LINK_FLAGS}")
 
-target_link_libraries(authserver
+target_link_libraries(logon
   shared
   ${MYSQL_LIBRARY}
   ${OPENSSL_LIBRARIES}
@@ -93,27 +93,27 @@ target_link_libraries(authserver
 )
 
 if( WIN32 )
-  add_custom_command(TARGET authserver
+  add_custom_command(TARGET logon
     POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/authserver.conf.dist ${CMAKE_BINARY_DIR}/bin/$(ConfigurationName)/
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/logon.conf.dist ${CMAKE_BINARY_DIR}/bin/$(ConfigurationName)/
   )
 endif()
 
 if( UNIX )
-  install(TARGETS authserver DESTINATION bin)
-  install(FILES auth DESTINATION bin)
-  install(FILES  authserver.conf.dist DESTINATION etc)
+  install(TARGETS logon DESTINATION bin)
+  install(FILES run-logon DESTINATION bin)
+  install(FILES  logon.conf.dist DESTINATION etc)
 elseif( WIN32 )
-  install(TARGETS authserver DESTINATION "${CMAKE_INSTALL_PREFIX}")
-  install(FILES authserver.conf.dist DESTINATION "${CMAKE_INSTALL_PREFIX}")
+  install(TARGETS logon DESTINATION "${CMAKE_INSTALL_PREFIX}")
+  install(FILES logon.conf.dist DESTINATION "${CMAKE_INSTALL_PREFIX}")
 endif()
 
 # Generate precompiled header
 if( USE_COREPCH )
   if(CMAKE_COMPILER_IS_GNUCXX)
-    add_precompiled_header(authserver ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/authPCH.h)
+    add_precompiled_header(logon ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/authPCH.h)
   elseif(MSVC)
-    add_native_precompiled_header(authserver ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/authPCH)
+    add_native_precompiled_header(logon ${CMAKE_CURRENT_SOURCE_DIR}/PrecompiledHeaders/authPCH)
   endif()
 endif()
 

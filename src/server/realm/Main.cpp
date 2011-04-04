@@ -32,7 +32,7 @@
 #include "Master.h"
 
 #ifndef _TRINITY_CORE_CONFIG
-# define _TRINITY_CORE_CONFIG  "worldserver.conf"
+# define _TRINITY_CORE_CONFIG  "realm.conf"
 #endif //_TRINITY_CORE_CONFIG
 
 #ifdef _WIN32
