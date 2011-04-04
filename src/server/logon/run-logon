@@ -1,5 +1,5 @@
 #!/bin/bash
 while [ 1 ]; do
-  echo "AuthServer started at `date`" >> start.log
-  ./authserver
+  echo "Logon started at `date`" >> start.log
+  ./logon
 done
