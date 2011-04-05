@@ -99,7 +99,7 @@ extern int main(int argc, char **argv)
     }
     sLog->Initialize();
 
-    sLog->outString("%s (realm-daemon)", _FULLVERSION);
+    sLog->outString("%s (logon-daemon)", _FULLVERSION);
     sLog->outString("<Ctrl-C> to stop.\n");
     sLog->outString("Using configuration file %s.", cfg_file);
 

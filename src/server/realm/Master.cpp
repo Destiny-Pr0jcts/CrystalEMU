@@ -123,18 +123,8 @@ int Master::Run()
     BigNumber seed1;
     seed1.SetRand(16 * 8);
 
-    sLog->outString("%s (core-daemon)", _FULLVERSION);
+    sLog->outString("%s (realm-daemon)", _FULLVERSION);
     sLog->outString("<Ctrl-C> to stop.\n");
-
-    sLog->outString(" ______                       __");
-    sLog->outString("/\\__  _\\       __          __/\\ \\__");
-    sLog->outString("\\/_/\\ \\/ _ __ /\\_\\    ___ /\\_\\ \\ ,_\\  __  __");
-    sLog->outString("   \\ \\ \\/\\`'__\\/\\ \\ /' _ `\\/\\ \\ \\ \\/ /\\ \\/\\ \\");
-    sLog->outString("    \\ \\ \\ \\ \\/ \\ \\ \\/\\ \\/\\ \\ \\ \\ \\ \\_\\ \\ \\_\\ \\");
-    sLog->outString("     \\ \\_\\ \\_\\  \\ \\_\\ \\_\\ \\_\\ \\_\\ \\__\\\\/`____ \\");
-    sLog->outString("      \\/_/\\/_/   \\/_/\\/_/\\/_/\\/_/\\/__/ `/___/> \\");
-    sLog->outString("                                 C O R E  /\\___/");
-    sLog->outString("http://TrinityCore.org                    \\/__/\n");
 
 #ifdef USE_SFMT_FOR_RNG
     sLog->outString("\n");
