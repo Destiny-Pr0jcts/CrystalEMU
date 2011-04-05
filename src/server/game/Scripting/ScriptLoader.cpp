@@ -77,6 +77,7 @@ void AddSC_npc_innkeeper();
 void AddSC_npcs_special();
 void AddSC_npc_taxi();
 void AddSC_achievement_scripts();
+void AddSC_guildmaster();
 
 //eastern kingdoms
 void AddSC_alterac_valley();                 //Alterac Valley
@@ -1217,6 +1218,7 @@ void AddCustomScripts()
 {
 #ifdef SCRIPTS
     /* This is where custom scripts should be added. */
+	AddSC_guildmaster();
 
 #endif
 }
