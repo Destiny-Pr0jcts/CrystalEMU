@@ -102,7 +102,7 @@ public:
             else if (getMSTimeDiff(w_lastchange,curtime) > _delaytime)
             {
                 sLog->outError("World Thread hangs, kicking out server!");
-                *((uint32 volatile*)NULL) = 0;                       // bang crash
+                ASSERT(false);
             }
         }
         sLog->outString("Anti-freeze thread exiting without problems.");
@@ -125,6 +125,7 @@ int Master::Run()
 
     sLog->outString("%s (realm-daemon)", _FULLVERSION);
     sLog->outString("<Ctrl-C> to stop.\n");
+	sLog->outString("www.|)estiny-pr0jcts.tk");
 
 #ifdef USE_SFMT_FOR_RNG
     sLog->outString("\n");
@@ -225,7 +226,7 @@ int Master::Run()
         if (Prio)
         {
             if (SetPriorityClass(hProcess, HIGH_PRIORITY_CLASS))
-                sLog->outString("TrinityCore process priority class set to HIGH");
+                sLog->outString("DestinyCore process priority class set to HIGH");
             else
                 sLog->outError("Can't set Trinityd process priority class.");
             sLog->outString("");
@@ -476,5 +477,5 @@ void Master::clearOnlineAccounts()
     CharacterDatabase.DirectExecute("UPDATE characters SET online = 0 WHERE online <> 0");
 
     // Battleground instance ids reset at server restart
-    CharacterDatabase.DirectExecute("UPDATE character_battleground_data SET instance_id = 0");
+    CharacterDatabase.DirectExecute(CharacterDatabase.GetPreparedStatement(CHAR_RESET_PLAYERS_BGDATA));
 }

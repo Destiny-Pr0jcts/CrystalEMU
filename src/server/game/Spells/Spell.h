@@ -427,7 +427,7 @@ class Spell
         void TakePower();
         void TakeAmmo();
 
-        void TakeRunePower();
+        void TakeRunePower(bool didHit);
         void TakeReagents();
         void TakeCastItem();
 
@@ -757,7 +757,7 @@ namespace Trinity
             ASSERT(i_source);
         }
 
-        template<class T> inline void Visit(GridRefManager<T>  &m)
+        template<class T> inline void Visit(GridRefManager<T>& m)
         {
             i_requireDeadTarget = i_spellProto ? bool(i_spellProto->AttributesEx3 & SPELL_ATTR3_REQUIRE_DEAD_TARGET) : false;
 

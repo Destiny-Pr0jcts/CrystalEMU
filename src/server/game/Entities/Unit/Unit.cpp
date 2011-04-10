@@ -171,7 +171,6 @@ m_vehicleKit(NULL), m_unitTypeMask(UNIT_MASK_NONE), m_HostileRefManager(this)
     m_CombatTimer = 0;
     m_lastManaUse = 0;
 
-    //m_victimThreat = 0.0f;
     for (uint8 i = 0; i < MAX_SPELL_SCHOOL; ++i)
         m_threatModifier[i] = 1.0f;
     m_isSorted = true;
@@ -179,7 +178,6 @@ m_vehicleKit(NULL), m_unitTypeMask(UNIT_MASK_NONE), m_HostileRefManager(this)
         m_speed_rate[i] = 1.0f;
 
     m_charmInfo = NULL;
-    //m_unit_movement_flags = 0;
     m_reducedThreatPercent = 0;
     m_misdirectionTargetGUID = 0;
 
@@ -15932,11 +15930,14 @@ void Unit::GetPartyMembers(std::list<Unit*> &TagUnitMap)
 
 Aura * Unit::AddAura(uint32 spellId, Unit *target)
 {
-    if (!target || !target->isAlive())
+    if (!target)
         return NULL;
 
     SpellEntry const *spellInfo = sSpellStore.LookupEntry(spellId);
     if (!spellInfo)
+        return NULL;
+
+    if (!target->isAlive() && !(spellInfo->Attributes & SPELL_ATTR0_PASSIVE) && !(spellInfo->AttributesEx2 & SPELL_ATTR2_ALLOW_DEAD_TARGET))
         return NULL;
 
     return AddAura(spellInfo, MAX_EFFECT_MASK, target);
