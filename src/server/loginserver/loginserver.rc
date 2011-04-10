@@ -24,7 +24,7 @@
 //
 // Generated from the TEXTINCLUDE 2 resource.
 //
-#include "windows.h"
+#include "windows.h" //"afxres.h"
 
 /////////////////////////////////////////////////////////////////////////////
 #undef APSTUDIO_READONLY_SYMBOLS
@@ -36,7 +36,7 @@
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDI_APPICON             ICON                    "realm.ico"
+IDI_APPICON             ICON                    "loginserver.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 // Neutre (Par défaut système) resources
@@ -69,12 +69,12 @@ BEGIN
     BEGIN
         BLOCK "080004b0"
         BEGIN
-            VALUE "FileDescription", "realm"
+            VALUE "FileDescription", "loginserver"
             VALUE "FileVersion", STRFILEVER
-            VALUE "InternalName", "realm"
-            VALUE "LegalCopyright", "Copyright (C) 2008-2010"
-            VALUE "OriginalFilename", "realm.exe"
-            VALUE "ProductName", "realm"
+            VALUE "InternalName", "loginserver"
+            VALUE "LegalCopyright", "Copyright (C) 2008-2011"
+            VALUE "OriginalFilename", "loginserver.exe"
+            VALUE "ProductName", "loginserver"
             VALUE "ProductVersion", STRPRODUCTVER
         END
     END
